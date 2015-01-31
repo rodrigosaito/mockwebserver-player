@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.squareup.okhttp:mockwebserver:2.2.0'
+    compile 'org.yaml:snakeyaml:1.14'
+    compile 'junit:junit:4.11'
+
+    testCompile 'org.apache.httpcomponents:httpclient:4.3.6'
+}
