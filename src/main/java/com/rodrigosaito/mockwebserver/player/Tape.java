@@ -28,4 +28,14 @@ public class Tape {
     public void setInteractions(final List<Interaction> interactions) {
         this.interactions = interactions;
     }
+
+    public boolean haRequestMatching() {
+        for (Interaction interaction : getInteractions()) {
+            if (interaction.getRequest() != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
