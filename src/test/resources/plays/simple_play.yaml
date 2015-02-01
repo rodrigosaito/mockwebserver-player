@@ -1,12 +1,7 @@
 !!com.rodrigosaito.mockwebserver.player.Tape
 name: simple play
 interactions:
-- request:
-    method: GET
-    uri: http://localhost:8080/
-    headers:
-      Host: localhost
-  response:
+- response:
     status: 200
     headers:
     body: Simple Tape
