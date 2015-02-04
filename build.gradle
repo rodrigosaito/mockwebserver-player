@@ -1,7 +1,11 @@
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.6
-version = '1.0'
+group = "com.github.rodrigosaito"
+archivesBaseName = "mockwebserver-player"
+version = '1.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -13,4 +17,66 @@ dependencies {
     compile 'junit:junit:4.11'
 
     testCompile 'org.apache.httpcomponents:httpclient:4.3.6'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Example Application'
+                packaging 'jar'
+                description 'A simpler way to prepare your responses with okhttp/mockwebserver, betamax style'
+                url 'https://github.com/rodrigosaito/mockwebserver-player'
+
+                scm {
+                    connection 'scm:git:ssh://git@github.com:rodrigosaito/mockwebserver-player.git'
+                    developerConnection 'scm:git:ssh://git@github.com:rodrigosaito/mockwebserver-player.git'
+                    url 'https://github.com/rodrigosaito/mockwebserver-player'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'rodrigo.saito'
+                        name 'Rodrigo Saito'
+                        email 'rodrigo.saito@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }
