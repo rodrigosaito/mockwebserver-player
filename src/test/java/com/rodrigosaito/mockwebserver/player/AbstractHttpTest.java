@@ -1,4 +1,4 @@
-package com.rodrigosaito.mockwebser.player;
+package com.rodrigosaito.mockwebserver.player;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

@@ -1,7 +1,5 @@
-package com.rodrigosaito.mockwebser.player;
+package com.rodrigosaito.mockwebserver.player;
 
-import com.rodrigosaito.mockwebserver.player.Play;
-import com.rodrigosaito.mockwebserver.player.Player;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.Rule;
