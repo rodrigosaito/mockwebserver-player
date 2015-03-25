@@ -6,6 +6,7 @@ public class Tape {
 
     private String name;
     private List<Interaction> interactions;
+    private int delay;
 
     public Tape() {}
 
@@ -37,5 +38,13 @@ public class Tape {
         }
 
         return false;
+    }
+
+    public void setDelay(final int delay) {
+        this.delay = delay;
+    }
+
+    public int getDelay() {
+        return delay;
     }
 }

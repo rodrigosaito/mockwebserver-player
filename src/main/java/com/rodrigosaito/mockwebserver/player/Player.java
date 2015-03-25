@@ -54,16 +54,20 @@ public class Player implements MethodRule {
         }
     }
 
-    private void preparePlays(final List<String> tapeNames) {
+    private void preparePlays(final List<Play> plays) {
         List<Tape> tapes = new ArrayList<Tape>();
         boolean requestMatching = false;
 
-        for (String tapeName : tapeNames) {
-            Tape tape = tapeReader.read(tapeName);
+        for (Play play : plays) {
+            for (String tapeName : play.value()) {
+                Tape tape = !tapeName.isEmpty() ? tapeReader.read(tapeName) : new Tape();
 
-            requestMatching = requestMatching || tape.haRequestMatching();
+                tape.setDelay(play.delay());
 
-            tapes.add(tape);
+                requestMatching = requestMatching || tape.haRequestMatching();
+
+                tapes.add(tape);
+            }
         }
 
         RequestMatchingDispatcher requestMatchingDispatcher = new RequestMatchingDispatcher();
@@ -82,6 +86,7 @@ public class Player implements MethodRule {
                             new MockResponse()
                                     .setResponseCode(response.getStatus())
                                     .setBody(response.getBody())
+                                    .setBodyDelayTimeMs(tape.getDelay())
                     );
 
                 } else {
@@ -89,6 +94,7 @@ public class Player implements MethodRule {
                             new MockResponse()
                                     .setResponseCode(response.getStatus())
                                     .setBody(response.getBody())
+                                    .setBodyDelayTimeMs(tape.getDelay())
                     );
                 }
             }
@@ -107,12 +113,10 @@ public class Player implements MethodRule {
                 startServer();
 
                 try {
-                    List<String> plays = new ArrayList<String>();
+                    List<Play> plays = new ArrayList<Play>();
                     for (Annotation annotation : method.getAnnotations()) {
                         if (annotation instanceof Play) {
-                            for (String play : ((Play) annotation).value()) {
-                                plays.add(play);
-                            }
+                            plays.add((Play) annotation);
                         }
                     }
 

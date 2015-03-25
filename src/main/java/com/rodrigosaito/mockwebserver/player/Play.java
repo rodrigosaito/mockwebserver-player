@@ -8,5 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Play {
-    String[] value();
+    String[] value() default "";
+
+    int delay() default 0;
 }
