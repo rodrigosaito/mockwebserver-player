@@ -93,3 +93,9 @@ public void test() throws IOException {
     assertEquals("Test 1", EntityUtils.toString(response1.getEntity()));
 }
 ```
+
+### Custome Settings
+
+```java
+player.setPort(58880); // changes the port of mockwebserver default is a random port
+```
