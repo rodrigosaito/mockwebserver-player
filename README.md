@@ -94,7 +94,7 @@ public void test() throws IOException {
 }
 ```
 
-### Custome Settings
+### Custom Settings
 
 ```java
 player.setPort(58880); // changes the port of mockwebserver default is a random port
