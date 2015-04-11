@@ -11,7 +11,7 @@ your MockResponses this project makes it easier to write your tests.
 
 ### Installation
 
-Add dependency to you pom.xml.
+Add dependency to your pom.xml.
 
 ```xml
 <dependency>
