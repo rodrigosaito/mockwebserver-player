@@ -1,4 +1,4 @@
-# Mockwebserver Player
+# Mockwebserver Player [![Circle CI](https://circleci.com/gh/rodrigosaito/mockwebserver-player.svg?style=svg)](https://circleci.com/gh/rodrigosaito/mockwebserver-player)
 
 Mockwebserver Player is a tool to simplify the use of [mockwebserver](https://github.com/square/okhttp/tree/master/mockwebserver)
 in your JUnit tests
