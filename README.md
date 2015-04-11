@@ -38,7 +38,7 @@ public void testPlayerWithDefaultSettings() throws IOException {
 Create a ```tapes/simple_play.yaml``` file inside your test directory.
 
 ```yaml
-!!com.rodrigosaito.mockwebserver.player.Tape
+!play
 name: simple play
 interactions:
 - response:
@@ -54,7 +54,7 @@ that will matches the request with path ```/test_1``` with the response containi
 and request with path ```/test_2``` with the response containing body ```Test 2```.
 
 ```yaml
-!!com.rodrigosaito.mockwebserver.player.Tape
+!play
 name: play with request matching
 interactions:
 - request:

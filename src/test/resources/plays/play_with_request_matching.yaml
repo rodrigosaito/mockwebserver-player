@@ -1,4 +1,4 @@
-!!com.rodrigosaito.mockwebserver.player.Tape
+!play
 name: play with request matching
 interactions:
 - request:
