@@ -9,6 +9,18 @@ your MockResponses this project makes it easier to write your tests.
 
 ## Usage
 
+### Installation
+
+Add dependency to you pom.xml.
+
+```xml
+<dependency>
+  <groupId>com.github.rodrigosaito</groupId>
+  <artifactId>mockwebserver-player</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
 ### Simple response
 
 Add a ```@Rule Player``` property to your test class.
