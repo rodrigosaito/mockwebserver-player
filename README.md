@@ -46,3 +46,50 @@ interactions:
     headers:
     body: Simple Tape
 ```
+
+### Request Matching
+
+Sometime you would like to match a request with a response in this case we have the following tape
+that will matches the request with path ```/test_1``` with the response containing body ```Test 1```
+and request with path ```/test_2``` with the response containing body ```Test 2```.
+
+```yaml
+!!com.rodrigosaito.mockwebserver.player.Tape
+name: play with request matching
+interactions:
+- request:
+    method: GET
+    uri: /test_1
+    headers:
+      Host: localhost
+  response:
+    status: 200
+    headers:
+    body: Test 1
+- request:
+    method: GET
+    uri: /test_2
+    headers:
+      Host: localhost
+  response:
+    status: 200
+    body: Test 2
+```
+
+And the test.
+
+```java
+@Test
+@Play("play_with_request_matching")
+public void test() throws IOException {
+    // Execute request that matches with the second request on tape
+    URL url2 = player.getURL("/test_2");
+    CloseableHttpResponse response2 = executeGet(url2.toString());
+    assertEquals("Test 2", EntityUtils.toString(response2.getEntity()));
+
+    // Execute request that matches with the first request on tape
+    URL url1 = player.getURL("/test_1");
+    CloseableHttpResponse response1 = executeGet(url1.toString());
+    assertEquals("Test 1", EntityUtils.toString(response1.getEntity()));
+}
+```
