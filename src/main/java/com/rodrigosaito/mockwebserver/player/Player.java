@@ -1,5 +1,6 @@
 package com.rodrigosaito.mockwebserver.player;
 
+import com.squareup.okhttp.internal.SslContextBuilder;
 import com.squareup.okhttp.mockwebserver.Dispatcher;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
@@ -22,6 +23,7 @@ public class Player implements MethodRule {
     private final TapeReader tapeReader;
 
     private Integer port;
+    private boolean https;
 
     public Player() {
         this.server = new MockWebServer();
@@ -36,8 +38,22 @@ public class Player implements MethodRule {
         this.port = port;
     }
 
-    private void startServer() throws IOException {
-        if (getPort() != null) {
+    public boolean isHttps() {
+        return https;
+    }
+
+    public void setHttps(boolean https) {
+        this.https = https;
+    }
+
+    private void startServer() throws Exception {
+        if (isHttps() && getPort() != null) {
+            setSslSupport();
+            server.play(getPort());
+        } else if (isHttps()) {
+            setSslSupport();
+            server.play();
+        } else if (getPort() != null) {
             server.play(getPort());
         } else {
             server.play();
@@ -152,5 +168,9 @@ public class Player implements MethodRule {
         public void addRequest(final String path, final MockResponse response) {
             requestResponses.put(path, response);
         }
+    }
+
+    private void setSslSupport() {
+        server.useHttps(SslContextBuilder.localhost().getSocketFactory(), false);
     }
 }
