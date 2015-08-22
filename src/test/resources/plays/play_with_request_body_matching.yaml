@@ -1,0 +1,11 @@
+!play
+name: play with request matching
+interactions:
+- request:
+    method: POST
+    uri: /some_path
+    body: custom=body
+  response:
+    status: 200
+    headers:
+    body: Some response

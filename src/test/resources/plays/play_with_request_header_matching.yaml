@@ -1,0 +1,12 @@
+!play
+name: play with request matching
+interactions:
+- request:
+    method: GET
+    uri: /some_path
+    headers:
+      Accept: application/json
+  response:
+    status: 200
+    headers:
+    body: Some response

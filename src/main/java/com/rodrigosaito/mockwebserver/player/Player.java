@@ -1,9 +1,7 @@
 package com.rodrigosaito.mockwebserver.player;
 
-import com.squareup.okhttp.mockwebserver.Dispatcher;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
-import com.squareup.okhttp.mockwebserver.RecordedRequest;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
@@ -12,9 +10,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Player implements MethodRule {
 
@@ -82,7 +78,7 @@ public class Player implements MethodRule {
 
                 if (requestMatching) {
                     requestMatchingDispatcher.addRequest(
-                            interaction.getRequest().getUri(),
+                            interaction.getRequest(),
                             new MockResponse()
                                     .setResponseCode(response.getStatus())
                                     .setBody(response.getBody())
@@ -128,29 +124,5 @@ public class Player implements MethodRule {
                 }
             }
         };
-    }
-
-    private static final class RequestMatchingDispatcher extends Dispatcher {
-
-        private Map<String, MockResponse> requestResponses = new HashMap<String, MockResponse>();
-
-        @Override
-        public MockResponse dispatch(final RecordedRequest request) throws InterruptedException {
-            return findResponse(request.getPath());
-        }
-
-        private MockResponse findResponse(final String path) {
-            MockResponse response = requestResponses.get(path);
-
-            if (response == null) {
-                return new MockResponse().setResponseCode(404).setBody("No Response Found");
-            }
-
-            return response;
-        }
-
-        public void addRequest(final String path, final MockResponse response) {
-            requestResponses.put(path, response);
-        }
     }
 }

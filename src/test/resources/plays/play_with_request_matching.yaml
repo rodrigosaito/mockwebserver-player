@@ -4,8 +4,6 @@ interactions:
 - request:
     method: GET
     uri: /test_1
-    headers:
-      Host: localhost
   response:
     status: 200
     headers:
@@ -13,8 +11,6 @@ interactions:
 - request:
     method: GET
     uri: /test_2
-    headers:
-      Host: localhost
   response:
     status: 200
     body: Test 2
