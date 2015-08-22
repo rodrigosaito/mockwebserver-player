@@ -17,7 +17,7 @@ Add dependency to your pom.xml.
 <dependency>
   <groupId>com.github.rodrigosaito</groupId>
   <artifactId>mockwebserver-player</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -64,6 +64,8 @@ interactions:
 Sometime you would like to match a request with a response in this case we have the following tape
 that will matches the request with path ```/test_1``` with the response containing body ```Test 1```
 and request with path ```/test_2``` with the response containing body ```Test 2```.
+
+If you add ```headers``` or ```body``` to request it will use them on matching as well.
 
 ```yaml
 !play
