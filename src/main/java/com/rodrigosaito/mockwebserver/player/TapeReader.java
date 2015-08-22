@@ -12,7 +12,13 @@ import java.io.InputStream;
 public class TapeReader {
 
     public Tape read(final String tapeName) {
-        InputStream input = getClass().getResourceAsStream("/plays/" + tapeName + ".yaml");
+        String path = "/plays/" + tapeName + ".yaml";
+
+        InputStream input = getClass().getResourceAsStream(path);
+
+        if (input == null) {
+            throw new TapeNotFoundException("Could not find tape: " + path);
+        }
 
         Object obj = getYaml().load(input);
 
