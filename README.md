@@ -47,7 +47,7 @@ public void testPlayerWithDefaultSettings() throws IOException {
 }
 ```
 
-Create a ```tapes/simple_play.yaml``` file inside your test directory.
+Create a ```plays/simple_play.yaml``` file inside your test directory.
 
 ```yaml
 !play
